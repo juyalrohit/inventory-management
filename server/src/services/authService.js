@@ -21,6 +21,8 @@ async function registerUser(payload) {
     role: payload.role || 'staff'
   });
 
+   res.cookie('token', token);
+
   return {
     user: {
       id: result.insertId,
@@ -28,8 +30,8 @@ async function registerUser(payload) {
       email: payload.email,
       role: payload.role || 'staff'
     },
-    token
   };
+  
 }
 
 async function loginUser(payload) {
@@ -50,6 +52,9 @@ async function loginUser(payload) {
     email: user.email,
     role: user.role
   });
+
+  res.cookie('token', token);
+
 
   return {
     user: {
